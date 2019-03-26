@@ -4,7 +4,7 @@
       "name": "bastionhost",
       "label": "Bastion Data"
     }
-  ], 
+  ],
   "output_datatypes": [
     {
       "name": "com.ibm.cloud.cloudconnections.ICP",
@@ -26,7 +26,7 @@
         ]
       }
     }
-  ],  
+  ],
     "input_groups": [
       {
         "name": "cloud",
@@ -118,7 +118,7 @@
       "label": "Bastion private key",
       "secured": true,
       "required": false
-    },  
+    },
     {
       "name": "bastion_password",
       "type": "string",
@@ -138,25 +138,25 @@
       "label": "Bastion host key",
       "secured": false,
       "required": false
-    },          
+    },
     {
       "name": "boot_hostname_ip",
       "default": {
-        "Enter Hostname": "0.0.0.0"
+        "Enter Hostname": "icppatmast01"
       },
-      "description": "Boot Node Hostname  and IP Address",
+      "description": "Boot/Master-Node Hostname and IP Address",
       "type": "map",
       "required": true,
       "secured": false,
-      "label": "Boot Node Hostname ",
+      "label": "Boot/Master-Node Hostname ",
       "hidden": false,
       "immutable": false,
       "group_name": "bootvirtualmachine"
     },
     {
       "name": "boot_memory",
-      "description": "Boot Node Node Memory Allocation (mb)",
-      "default": "8192",
+      "description": "Boot/Master-Node Node Memory Allocation (mb)",
+      "default": "32768",
       "type": "string",
       "required": true,
       "secured": false,
@@ -167,12 +167,12 @@
     },
     {
       "name": "boot_vcpu",
-      "description": "Boot Node vCPU Allocation",
-      "default": "4",
+      "description": "Boot/Master-Node vCPU Allocation",
+      "default": "16",
       "type": "string",
       "required": true,
       "secured": false,
-      "label": "Boot Node vCPU Allocation",
+      "label": "Boot/Master-Node vCPU Allocation",
       "hidden": false,
       "immutable": false,
       "group_name": "bootvirtualmachine"
@@ -183,75 +183,31 @@
       "type": "string",
       "required": true,
       "secured": false,
-      "label": "Boot Node Keep Disk on Remove",
+      "label": "Boot/Master-Node Keep Disk on Remove",
       "hidden": true,
       "immutable": false,
       "group_name": "bootvirtualmachine"
     },
     {
       "name": "boot_vm_disk1_size",
-      "description": "Boot Node Disk Size Disk 1 (GB)",
-      "default": "150",
+      "description": "Boot/Master-Node Disk Size Disk 1 (GB) (root-partition)",
+      "default": "500",
       "type": "string",
       "required": true,
       "secured": false,
-      "label": "Boot Node Disk Size (GB)",
+      "label": "Boot/Master-Node Disk Size (GB)",
       "hidden": false,
       "immutable": false,
       "group_name": "bootvirtualmachine"
     },
     {
-      "name": "boot_vm_disk2_enable",
-      "default": "false",
-      "type": "string",
-      "required": true,
-      "secured": false,
-      "label": "Boot Node Datastore Name - Disk 2",
-      "hidden": true,
-      "immutable": false,
-      "options": [
-        {
-          "value": "true",
-          "label": "true"
-        },
-        {
-          "value": "false",
-          "label": "false",
-          "default": true
-        }
-      ],
-      "group_name": "bootvirtualmachine"
-    },
-    {
-      "name": "boot_vm_disk2_keep_on_remove",
-      "default": "false",
-      "type": "string",
-      "required": true,
-      "secured": false,
-      "label": "Boot Node Keep Disk on Remove - Disk 2",
-      "hidden": true,
-      "immutable": false,
-      "group_name": "bootvirtualmachine"
-    },
-    {
-      "name": "boot_vm_disk2_size",
-      "description": "Boot Node Disk Size Disk 2 (GB)",
-      "default": "50",
-      "type": "string",
-      "required": true,
-      "secured": false,
-      "label": "Boot Node Disk Size (GB)",
-      "hidden": true,
-      "immutable": false,
-      "group_name": "bootvirtualmachine"
-    },
-    {
       "name": "boot_vm_ipv4_gateway",
-      "description": "Boot Node IP Gateway Address",
+      "default": "10.135.29.1",
+      "description": "Boot/Master-Node IP Gateway Address",
       "type": "string",
       "required": true,
       "secured": false,
-      "label": "Boot Node IP Gateway",
+      "label": "Gateway",
       "hidden": false,
       "immutable": false,
       "group_name": "bootvirtualmachine",
@@ -260,11 +216,12 @@
     },
     {
       "name": "boot_vm_ipv4_prefix_length",
+      "default": "26",
       "description": "Integer value between 1 and 32 for the prefix length, CIDR, to use when statically assigning an IPv4 address",
       "type": "string",
       "required": true,
       "secured": false,
-      "label": "Boot Node IP Netmask (CIDR)",
+      "label": "Boot/Master-Node Subnet-Mask (CIDR)",
       "hidden": false,
       "immutable": false,
       "group_name": "bootvirtualmachine",
@@ -294,6 +251,7 @@
     },
     {
       "name": "docker_binary_url",
+      "default": "http://10.135.29.40:1234/docker180301/icp-docker-18.03.1_x86_64.bin",
       "description": "Location of the Docker Binaries used by IBM Cloud Private",
       "type": "string",
       "required": true,
@@ -373,7 +331,7 @@
 				}
 			],
 			"group_name": "icpmultinode"
-    },    
+    },
     {
       "name": "worker_enable_glusterFS",
       "description": "Enable / Disable the installation of Gluster File System in  IBM Cloud Private Installation",
@@ -399,6 +357,7 @@
     },
     {
       "name": "icp_cluster_name",
+      "default": "mycluster",
       "description": "IBM Cloud Private Cluster Name",
       "type": "string",
       "required": true,
@@ -456,9 +415,10 @@
       "hidden": false,
       "immutable": false,
       "group_name": "icpmultinode"
-    },    
+    },
     {
       "name": "icp_binary_url",
+      "default": "http://10.135.29.40:1234/icp310/ibm-cloud-private-x86_64-3.1.0.tar.gz",
       "description": "Location of the IBM Cloud Private Binaries used by IBM Cloud Private",
       "type": "string",
       "required": true,
@@ -499,12 +459,12 @@
       "description": "IBM Cloud Private Version Number",
       "options": [{
         "value": "3.1.1",
-        "label": "3.1.1",
-        "default": "true"
+        "label": "3.1.1"
         },
         {
           "value": "3.1.0",
-          "label": "3.1.0"
+          "label": "3.1.0",
+          "default": "true"
         },
         {
           "value": "2.1.0.3",
@@ -560,13 +520,14 @@
     {
       "name": "manage_hostname_ip",
       "default": {
-        "Enter Hostname": "0.0.0.0"
+        "Enter Hostname": "10.135.29.52"
       },
       "description": "Management Node Hostname and IP Address",
       "type": "map",
       "required": false,
       "secured": false,
       "label": "Management Node Hostname",
+      "default": "icppatmgmt01",
       "hidden": false,
       "immutable": false,
       "group_name": "mgmtvirtualmachine"
@@ -1115,7 +1076,7 @@
         }
       ],
       "group_name": "vavirtualmachine"
-    },     
+    },
     {
       "name": "va_hostname_ip",
       "default": {
@@ -1428,7 +1389,7 @@
       ],
       "group_name": "nfs_servervirtualmachine"
     },
-    
+
     {
       "name": "nfs_server_hostname_ip",
       "default": {
@@ -1563,7 +1524,7 @@
       "system": false,
       "required": true,
       "immutable": false
-    },    
+    },
     {
       "name": "ibm_cloud_private_admin_url",
       "type": "url",
