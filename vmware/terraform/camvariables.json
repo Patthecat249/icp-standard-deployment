@@ -1325,6 +1325,7 @@
     },
     {
       "name": "vsphere_datacenter",
+      "default": "datacenter1",
       "description": "The name of a Datacenter in which to launch the IBM Cloud Private.",
       "type": "string",
       "required": true,
@@ -1336,6 +1337,7 @@
     },
     {
       "name": "vsphere_resource_pool",
+      "default": "RP-CAM",
       "description": "Name of the default resource pool for the cluster. Specified as 'cluster_name/resource_pool'",
       "type": "string",
       "required": true,
@@ -1347,6 +1349,7 @@
     },
     {
       "name": "vm_network_interface_label",
+      "default":"SDDC-DPG-Mgmt",
       "description": "vSphere Port Group name to assign to this network interface.",
       "type": "string",
       "required": true,
@@ -1358,6 +1361,7 @@
     },
     {
       "name": "vm_folder",
+      "default": "ICP-3.1.2-Patrick",
       "description": "vSphere Folder name",
       "type": "string",
       "required": false,
