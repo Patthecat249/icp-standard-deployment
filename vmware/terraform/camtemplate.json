@@ -1,6 +1,6 @@
 {
-    "name": "IBM Cloud Private Medium Setup Installation",
-    "description": "This template will deploy medium instance of IBM Cloud Private",
+    "name": "IBM Cloud Private Standard Installation - 1M1P3W",
+    "description": "This template will deploy a standard instance of IBM Cloud Private with 1 Master, 1 Proxy and 3 Worker Nodes",
     "version": "1.0",
     "imageUrl": "",
     "image": "",
@@ -23,9 +23,9 @@
       }
     },
     "metadata": {
-      "displayName": "Medium Node Deployment of IBM Cloud Private",
+      "displayName": "Standard Deployment of IBM Cloud Private - 1M1P3W",
       "providerDisplayName": "VMware vSphere",
-      "longDescription": "This template will deploy a Medium instance of IBM Cloud Private",
+      "longDescription": "This template will deploy a standard instance of IBM Cloud Private with 1 Master, 1 Proxy and 3 Worker Nodes",
       "bullets": [{
     "title": "Clouds",
     "description": " VMware vSphere<br>"},
@@ -34,13 +34,13 @@
     "description": "Ubuntu 16<br>"},
 {
     "title": "Topology",
-    "description": "Medium Node Virtual Machine (8 VMs) <br> Virtual Machine 1     : IBM Cloud Private Boot Node<br>Virtual Machine 2 : IBM Cloud Private Master Nodes<br>Virtual Machine 3   : IBM Cloud Private Proxy Nodes<br>Virtual Machine 4/5/6 : IBM Cloud Private Worker Nodes<br>Virtual Machine 7    : IBM Cloud Private Vulnerability Node<br>Virtual Machine 8    : IBM Cloud Private NFS Server Node<br>"},
+    "description": "The Installation-type needs five Virtual Machines (5 VMs) <br> Virtual Machine 1     : IBM Cloud Private Boot/Master Node<br>Virtual Machine 2 : IBM Cloud Private Proxy Node<br>Virtual Machine 3   : IBM Cloud Private Worker1-Nodes<br>Virtual Machine 4 : IBM Cloud Private Worker2-Node<br>Virtual Machine 5    : IBM Cloud Private Worker3-Node<br>"},
 {
     "title": "Software Deployed",
     "description": "IBM Cloud Private<br>"},
 {
     "title": "Default Virtual Machine Settings",
-    "description": "<ul><li>Boot Node: vCPU 4, Memory (GB) 8, Disk (GB) 150</li><li>Master Node: vCPU 8, Memory (GB) 16, Disk (GB) 200</li><li>Proxy Node: vCPU 2, Memory (GB) 8, Disk (GB) 100</li><li>Worker Node: vCPU 4, Memory (GB) 8, Disk (GB) 200</li><li>Vulnerability Node: vCPU 4, Memory (GB) 8, Disk (GB) 150</li><li>NFS Server Node: vCPU 4, Memory (GB) 8, Disk (GB) 150</li><ul>"},
+    "description": "<ul><li>Boot/Master-Node: vCPU 16, Memory (GB) 32, Disk (GB) 500</li><li>Proxy-Node: vCPU 8, Memory (GB) 16, Disk (GB) 200</li><li>Worker-Node1,2,3: vCPU 2, Memory (GB) 8, Disk (GB) 100</li><ul>"},
 {
     "title": "Usage and Special Notes",
     "description": "<ol class=\"list-numbering\"><li>The user is responsible for obtaining appropriate software licenses and downloads prior to template deployment.</li><li>IBM Knowledge Center for IBM Cloud Private - <a href=\"https://www.ibm.com/support/knowledgecenter/en/SSBS6K/product_welcome_cloud_private.html\" target=\"_blank\">https://www.ibm.com/support/knowledgecenter/en/SSBS6K/product_welcome_cloud_private.html</a></li><li>IBM Support Portal - <a href=\"https://www.ibm.com/support/home/\" target=\"_blank\">https://www.ibm.com/support/home/</a></li><ol>"
@@ -56,4 +56,3 @@
       ]
     }
 }
-
