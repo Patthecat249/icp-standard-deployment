@@ -65,7 +65,7 @@ This template will setup the following hardware minimum requirements:
 | VM5    | 16 | 32768 | 500 |
 
 ***Notes***
-Disk 1: The Base Disk Size on virtual machine must be set to 500GB!
+
 
 ### Supported operating systems and platforms
 
