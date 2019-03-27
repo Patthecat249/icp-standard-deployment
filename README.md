@@ -18,8 +18,8 @@ The components of a IBM Cloud Private deployment include:
 
 ## VM and ICP-Roles
 
-* VM1: Boot/Master-Node and central NFS-Server for this ICP-Cluster
-* VM2: PROXY-Node
+* VM1: Boot and Master-Node + NFS-Server for this ICP-Cluster
+* VM2: Proxy-Node
 * VM3: Worker-Node1
 * VM4: Worker-Node2
 * VM5: Worker-Node3
@@ -28,48 +28,44 @@ The components of a IBM Cloud Private deployment include:
 * Management = disabled
 * Vulnerability-Advisor (VA) = disabled
 * Gluster-FS = disabled
-* 
+*
 
-![IBM Cloud Private Medium Topology](./ICP-Architecture.jpg)
-<p align="center">Image 1: IBM Cloud Private HA Node Topology></p>
+## vSphere-VM-template
+I created a ubuntu 16.04.6 LTS-VM and made some customizations like:
+* NFS-Server/Client
+* Socat
+* extend root-filesystem to 500GB (this is thin-provisioned within VMware)
+* Preinstalled IBM-Docker-18.03.1
+* prepared for ssh-key-authorization
 
-For more infomation on IBM Cloud Private Nodes, please reference the Knowledge Center: <https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/getting_started/architecture.html>
+then I converted this VM into a template with these specs:
+* 16 vCPU
+* 32GB RAM
+* single Disk with 500GB (thin)
+* 1x vNIC
 
-## IBM Cloud Private Versions
+## IBM Cloud Private Version
 
-| ICP Version | GitTag Reference|
-|------|:-------------:|
-| 2.1.0.2| 2.0|
-| 2.1.0.3| 2.1|
-| 3.1.0  | 2.2|
-| 3.1.1  | 2.3|
+* 3.1.2
 
-<https://github.com/IBM-CAMHub-Open/template_icp_installer_medium>
+<https://github.com/Patthecat249/icp-standard-deployment>
 
 ## System Requirements
 
 ### Hardware requirements
 
-IBM Cloud Private nodes must meet the following requirements:
-<https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0/supported_system_config/hardware_reqs.html>
-
 This template will setup the following hardware minimum requirements:
 
-| Node Type | CPU Cores | Memory (mb) | Disk 1 | Disk 2 | Number of hosts |
-|------|:-------------:|:----:|:-----:|:-----:|:-----:|
-| Management | 4 | 16384 | 200 | n/a | 1 |
-| Master  | 12 | 32768 | 300 | n/a | 1 |
-| Proxy | 2 | 8192 | 200 | n/a | 1 |
-| Worker  | 16 | 16384 | 200 | 300 | 1 |
-| Vulnerability Advisor | 8 | 8192 | 150 | n/a | 1 |
-| NFS Server | 4 | 8192 | 150 | 50 | 1 |
+| VM | CPU Cores | Memory (mb) | Disk 1 |
+|:------:|:-------------:|:----:|:-----:|
+| VM1    | 16 | 32768 | 500 |
+| VM2    | 16 | 32768 | 500 |
+| VM3    | 16 | 32768 | 500 |
+| VM4    | 16 | 32768 | 500 |
+| VM5    | 16 | 32768 | 500 |
 
 ***Notes***
-Disk 1: Base Disk Size on virtual machine
-Disk 2: Additonal Disk on virtual Machine
-
-- Worker Disk is for internal GlusterFS provision
-- NFS Disk is for additonal File Systems
+Disk 1: The Base Disk Size on virtual machine must be set to 500GB!
 
 ### Supported operating systems and platforms
 
@@ -89,11 +85,8 @@ The following operating systems and platforms are supported.
 The following network information is required:
 Based on the Standard setup:
 
-- IP Address
-  - 13 IP Address's
-    - 11 for Nodes
-    - 2 for Cluster IPs (management and proxy VIPs)
-- Netmask Bit Number eg 24
+- 5x IP Addresses are needed
+- Subnetmask in CIDR (eg. 192.168.1.1/24)
 - Network Gateway
 - Interface Name
 
@@ -121,7 +114,7 @@ The following tables list the template variables.
 | vm_os_password | Virtual Machine Template User Password | string |  |
 | vm_template | Virtual Machine Template Name | string |  |
 | vm_disk1_datastore | Virtual Machine Datastore Name - Disk 1 | string |  |
-| vm_disk2_datastore | Virtual Machine Datastore Name - Disk 2 | string |  |
+
 
 ### IBM Cloud Private Multi-Node Settings
 
@@ -148,20 +141,9 @@ The following tables list the template variables.
 | icp_binary_url |  IBM Cloud Private Download Location (http/https/ftp/file)| string | |
 | icp_private_ssh_key | IBM Cloud Private - Private SSH Key | string | `` |
 | icp_public_ssh_key | IBM Cloud Private - Public SSH Key | string | `` |
-| icp_version | IBM Cloud Private Version | string | `3.1.0` |
+| icp_version | IBM Cloud Private Version | string | `3.1.2` |
 | kub_version | Kubernetes Version| string | `1.11.0` |
 
-### Management Node Input Settings
-
-| Name | Description | Type | Default |
-|------|-------------|:----:|:-----:|
-| boot_prefix_name | Management Node Hostname Prefix | string | `ICPBoot` |
-| boot_memory |  Management Node Memory Allocation (mb) | string | `16384` |
-| boot_vcpu | Management Node vCPU Allocation | string | `4` |
-| boot_vm_disk1_size | Management Node Disk Size (GB) | string | `200` |
-| boot_vm_ipv4_address | Management Nodes IP Address | list | `<list>` |
-| boot_vm_ipv4_gateway | Management Node IP Gateway | string |  |
-| boot_vm_ipv4_prefix_length | Management Node IP Netmask (CIDR) | string | `24` |
 
 ### Master Nodes Input Settings
 
@@ -169,11 +151,11 @@ The following tables list the template variables.
 |------|-------------|:----:|:-----:|
 | master_prefix_name | Master Node Hostname Prefix | string | `ICPMaster` |
 | master_memory | Master Node Memory Allocation (mb) | string | `32768` |
-| master_vcpu | Master Node vCPU Allocation | string | `12` |
-| master_vm_disk1_size | Master Node Disk Size (GB)  | string | `300` |
+| master_vcpu | Master Node vCPU Allocation | string | `16` |
+| master_vm_disk1_size | Master Node Disk Size (GB)  | string | `500` |
 | master_vm_ipv4_address | Master Nodes IP Address's | list | `<list>` |
 | master_vm_ipv4_gateway | Master Node IP Gateway | string |  |
-| master_vm_ipv4_prefix_length | Master Node IP Netmask (CIDR) | string | `24` |
+| master_vm_ipv4_prefix_length | Master Node IP Netmask (CIDR) | string | `26` |
 | master_nfs_folders | Master Node NFS Directories | list | `<list>` |
 
 ### Proxy Nodes Input Settings
@@ -181,52 +163,37 @@ The following tables list the template variables.
 | Name | Description | Type | Default |
 |------|-------------|:----:|:-----:|
 | proxy_prefix_name | Proxy Node Hostname Prefix | string | `ICPProxy` |
-| proxy_memory | Proxy Node Memory Allocation (mb) | string | `8192` |
-| proxy_vcpu | Proxy Node vCPU Allocation | string | `2` |
-| proxy_vm_disk1_size | Proxy Node Disk Size (GB) | string | `200` |
+| proxy_memory | Proxy Node Memory Allocation (mb) | string | `32768` |
+| proxy_vcpu | Proxy Node vCPU Allocation | string | `16` |
+| proxy_vm_disk1_size | Proxy Node Disk Size (GB) | string | `500` |
 | proxy_vm_ipv4_address | Proxy Nodes IP Address's | list | `<list>` |
 | proxy_vm_ipv4_gateway | Proxy Node IP Gateway | string |  |
-| proxy_vm_ipv4_prefix_length | Proxy Node IP Netmask (CIDR)  | string | `24` |
+| proxy_vm_ipv4_prefix_length | Proxy Node IP Netmask (CIDR)  | string | `26` |
 
 ### Worker Nodes Input Settings
 
 | Name | Description | Type | Default |
 |------|-------------|:----:|:-----:|
 | worker_prefix_name | Worker Node Hostname Prefix | string | `ICPWorker` |
-| worker_memory | Worker Node Memory Allocation (mb) | string | `16384` |
+| worker_memory | Worker Node Memory Allocation (mb) | string | `32768` |
 | worker_vcpu | Worker Node vCPU Allocation | string | `16` |
-| worker_vm_disk1_size | Worker Node Disk Size (GB) | string | `200` |
-| worker_vm_disk2_enable | Worker Node Enable - Disk 2 | string | `true` |
-| worker_vm_disk2_size | Worker Node Disk Size (GB) - Disk 2 (Gluster FS) | string | `50` |
+| worker_vm_disk1_size | Worker Node Disk Size (GB) | string | `500` |
 | worker_vm_ipv4_address | Worker Nodes IP Address's | list | `<list>` |
 | worker_vm_ipv4_gateway |Worker Node IP Gateway  | string |  |
-| worker_vm_ipv4_prefix_length | Worker Node IP Netmask (CIDR) | string | `24` |
-
-### Vulnerability Advisor Node Input Settings
-
-| Name | Description | Type | Default |
-|------|-------------|:----:|:-----:|
-| va_prefix_name | Vulnerability Advisor Node Hostname Prefix | string | `ICPVA` |
-| va_memory | Vulnerability Advisor Node Memory Allocation (mb) | string | `8192` |
-| va_vcpu | Vulnerability Advisor Node vCPU Allocation | string | `8` |
-| va_vm_disk1_size | Vulnerability Advisor Node Disk Size (GB) | string | `150` |
-| va_vm_ipv4_address | Vulnerability Advisor Nodes IP Address | list | `<list>` |
-| va_vm_ipv4_gateway | Vulnerability Advisor Node IP Gateway | string |  |
-| va_vm_ipv4_prefix_length | Vulnerability Advisor Node IP Netmask (CIDR) | string | `24` |
+| worker_vm_ipv4_prefix_length | Worker Node IP Netmask (CIDR) | string | `26` |
 
 ### NFS Server Node Input Settings
 
 | Name | Description | Type | Default |
 |------|-------------|:----:|:-----:|
 | nfs_server_prefix_name | NFS Server Node Hostname Prefix | string | `ICPNFS` |
-| nfs_server_memory | NFS Server Node Memory Allocation (mb) | string | `8192` |
-| nfs_server_vcpu | NFS Server Node vCPU Allocation | string | `4` |
-| nfs_server_vm_disk1_size | NFS Server Node Disk Size (GB)  | string | `150` |
-| nfs_server_vm_disk2_size | NFS Server Node Disk Size (GB) - Disk 2 (NFS Size) | string | `100` |
+| nfs_server_memory | NFS Server Node Memory Allocation (mb) | string | `32768` |
+| nfs_server_vcpu | NFS Server Node vCPU Allocation | string | `16` |
+| nfs_server_vm_disk1_size | NFS Server Node Disk Size (GB)  | string | `500` |
 | nfs_server_vm_ipv4_address | NFS Server Nodes IP Address | list | `<list>` |
 | nfs_server_vm_ipv4_gateway | NFS Server Node IP Gateway | string |  |
-| nfs_server_vm_ipv4_prefix_length | NFS Server Node IP Netmask (CIDR) | string | `24` |
-| nfs_server_folder | NFS Server Node Server Folder | string | `/var/nfs` |
+| nfs_server_vm_ipv4_prefix_length | NFS Server Node IP Netmask (CIDR) | string | `26` |
+| nfs_server_folder | NFS Server Node Server Folder | string | `/export` |
 | nfs_server_mount_point | NFS Server Node Mount Point | string | `/mnt/nfs` |
 
 ## Template Output Variables
