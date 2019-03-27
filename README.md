@@ -2,22 +2,33 @@
 <!---
 Copyright IBM Corp. 2018, 2018
 --->
+# Attention
+This project is __use by myself to learn__ the process with **Github, IBM Cloud Automation Manager Templates, Atom (editor) and terraform**
+
+# AIM / goal
+The aim of this project is to create a cam-template to deploy a standard-installation of IBM Cloud Private in a vsphere environment with 1x Master-, 1x Proxy- and 3x Worker-Nodes. Most of the Variables should be prefilled, to make the process of deployment quicker.
 
 # IBM Cloud Private Installer
 
-The IBM Cloud Private Medium Deployment Terraform template and inline modules will provision several virtual machine, install prerequisites and install the IBM Cloud Private product within you vmWare Hypervisor enviroment.
+This template will use terraform to provision 5 VMs in a vSphere environment.
 
-This template will install and configure the IBM Cloud Private in an medium topology.
+This template will install and configure the IBM Cloud Private in an standard-topology.
 
 The components of a IBM Cloud Private deployment include:
 
-- NFS Server (1 Node)
-- Management Node (1 Node)
-- Master Nodes (1 Node)
-- Proxy Nodes (1 Ndode)
-- Worker Nodes (3 Nodes)
-- Vulnerabilty Node (1 Node)
+## VM and ICP-Roles
 
+* VM1: Boot/Master-Node and central NFS-Server for this ICP-Cluster
+* VM2: PROXY-Node
+* VM3: Worker-Node1
+* VM4: Worker-Node2
+* VM5: Worker-Node3
+
+## Enabled/Disabled Services
+* Management = disabled
+* Vulnerability-Advisor (VA) = disabled
+* Gluster-FS = disabled
+* 
 
 ![IBM Cloud Private Medium Topology](./ICP-Architecture.jpg)
 <p align="center">Image 1: IBM Cloud Private HA Node Topology></p>
@@ -225,4 +236,3 @@ The following tables list the template variables.
 | ibm_cloud_private_admin_url | IBM Cloud Private Cluster URL |
 | ibm_cloud_private_admin_user | IBM Cloud Private Admin Username |
 | ibm_cloud_private_admin_password | IBM Cloud Private Admin Password |
-
