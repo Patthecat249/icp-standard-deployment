@@ -34,7 +34,7 @@
     "description": "Ubuntu 16<br>"},
 {
     "title": "Topology",
-    "description": "The Installation-type needs five Virtual Machines (5 VMs) <br> Virtual Machine 1     : IBM Cloud Private Boot/Master Node<br>Virtual Machine 2 : IBM Cloud Private Proxy Node<br>Virtual Machine 3   : IBM Cloud Private Worker1-Node<br>Virtual Machine 4 : IBM Cloud Private Worker2-Node<br>Virtual Machine 5    : IBM Cloud Private Worker3-Node<br>"},
+    "description": "The Installation-type needs five Virtual Machines (5 VMs) <br> VM1: IBM Cloud Private Boot/Master Node<br>VM2: IBM Cloud Private Proxy Node<br>VM3: IBM Cloud Private Worker1-Node<br>VM4: IBM Cloud Private Worker2-Node<br>VM5: IBM Cloud Private Worker3-Node<br>"},
 {
     "title": "Software Deployed",
     "description": "IBM Cloud Private<br>"},
