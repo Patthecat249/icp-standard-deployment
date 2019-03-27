@@ -5,6 +5,8 @@ Copyright IBM Corp. 2018, 2018
 # Attention
 This project is __use by myself to learn__ the process with **Github, IBM Cloud Automation Manager Templates, Atom (editor) and terraform**
 
+This is a change in code...
+
 # AIM / goal
 The aim of this project is to create a cam-template to deploy a standard-installation of IBM Cloud Private in a vsphere environment with 1x Master-, 1x Proxy- and 3x Worker-Nodes. Most of the Variables should be prefilled, to make the process of deployment quicker.
 
