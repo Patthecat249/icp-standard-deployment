@@ -5,7 +5,7 @@ variable "boot_hostname_ip" {
 
 variable "boot_vcpu" {
   type    = "string"
-  default = "4"
+  default = "Durch Default-Variable gesetzt = 4, obwohl in camvariables.json = 16 gesetzt ist."
 }
 
 variable "boot_memory" {
@@ -15,10 +15,12 @@ variable "boot_memory" {
 
 variable "boot_vm_ipv4_gateway" {
   type = "string"
+  default = "10.135.29.1"
 }
 
 variable "boot_vm_ipv4_prefix_length" {
   type = "string"
+  default = "26"
 }
 
 variable "boot_vm_disk1_size" {
@@ -54,6 +56,7 @@ variable "boot_vm_disk2_keep_on_remove" {
 # Master Nodes
 variable "master_hostname_ip" {
   type = "map"
+  default = "icppatmast01"
 }
 
 variable "master_vcpu" {

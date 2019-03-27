@@ -142,10 +142,9 @@
     {
       "name": "boot_hostname_ip",
       "default": {
-        "Enter Hostname": "10.135.29.52"
+        "Enter Hostname": "icppatmast01"
       },
       "description": "Boot/Master-Node Hostname and IP Address",
-      "default": "icppatmast01",
       "type": "map",
       "required": true,
       "secured": false,
@@ -203,7 +202,6 @@
     },
     {
       "name": "boot_vm_ipv4_gateway",
-      "default": "10.135.29.1",
       "description": "Boot/Master-Node IP Gateway Address",
       "type": "string",
       "required": true,
@@ -217,7 +215,6 @@
     },
     {
       "name": "boot_vm_ipv4_prefix_length",
-      "default": "26",
       "description": "Integer value between 1 and 32 for the prefix length, CIDR, to use when statically assigning an IPv4 address",
       "type": "string",
       "required": true,
@@ -358,7 +355,6 @@
     },
     {
       "name": "icp_cluster_name",
-      "default": "mycluster",
       "description": "IBM Cloud Private Cluster Name",
       "type": "string",
       "required": true,
@@ -669,7 +665,6 @@
     {
       "name": "master_memory",
       "description": "Master Node Node Memory Allocation (mb)",
-      "default": "32768",
       "type": "string",
       "required": true,
       "secured": false,
