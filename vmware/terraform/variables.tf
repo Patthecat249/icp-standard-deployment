@@ -24,7 +24,7 @@ variable "boot_vm_ipv4_prefix_length" {
 variable "boot_vm_disk1_size" {
   type = "string"
 
-  default = "150"
+  default = "500"
 }
 
 variable "boot_vm_disk1_keep_on_remove" {
@@ -59,27 +59,31 @@ variable "master_hostname_ip" {
 variable "master_vcpu" {
   type = "string"
 
-  default = "8"
+  default = "16"
 }
 
 variable "master_memory" {
   type = "string"
 
-  default = "16384"
+  default = "32768"
 }
 
 variable "master_vm_ipv4_gateway" {
   type = "string"
+
+  default = "10.135.29.1"
 }
 
 variable "master_vm_ipv4_prefix_length" {
   type = "string"
+
+  default = "26"
 }
 
 variable "master_vm_disk1_size" {
   type = "string"
 
-  default = "200"
+  default = "500"
 }
 
 variable "master_vm_disk1_keep_on_remove" {
@@ -109,7 +113,7 @@ variable "master_vm_disk2_keep_on_remove" {
 variable "master_nfs_folders" {
   type = "list"
 
-  default = ["/var/lib/registry", "/var/lib/icp/audit"]
+  default = ["/export", "/export/data"]
 }
 
 # Proxy Nodes
@@ -140,7 +144,7 @@ variable "proxy_vm_ipv4_prefix_length" {
 variable "proxy_vm_disk1_size" {
   type = "string"
 
-  default = "100"
+  default = "500"
 }
 
 variable "proxy_vm_disk1_keep_on_remove" {
@@ -186,16 +190,20 @@ variable "worker_memory" {
 
 variable "worker_vm_ipv4_gateway" {
   type = "string"
+
+  default = "10.135.29.1"
 }
 
 variable "worker_vm_ipv4_prefix_length" {
   type = "string"
+
+  default = "26"
 }
 
 variable "worker_vm_disk1_size" {
   type = "string"
 
-  default = "200"
+  default = "500"
 }
 
 variable "worker_vm_disk1_keep_on_remove" {
@@ -230,7 +238,7 @@ variable "worker_enable_glusterFS" {
 
 variable "gluster_volumetype_none" {
   type        = "string"
-  default     = "true"
+  default     = "false"
   description = "Gluster durability"
 }
 
@@ -253,16 +261,20 @@ variable "va_memory" {
 
 variable "va_vm_ipv4_gateway" {
   type = "string"
+
+  default = "10.135.29.1"
 }
 
 variable "va_vm_ipv4_prefix_length" {
   type = "string"
+
+  default = "26"
 }
 
 variable "va_vm_disk1_size" {
   type = "string"
 
-  default = "150"
+  default = "500"
 }
 
 variable "va_vm_disk1_keep_on_remove" {
@@ -321,7 +333,7 @@ variable "manage_vm_ipv4_prefix_length" {
 variable "manage_vm_disk1_size" {
   type = "string"
 
-  default = "150"
+  default = "500"
 }
 
 variable "manage_vm_disk1_keep_on_remove" {
@@ -387,7 +399,7 @@ variable "nfs_server_vm_ipv4_prefix_length" {
 variable "nfs_server_vm_disk1_size" {
   type = "string"
 
-  default = "150"
+  default = "500"
 }
 
 variable "nfs_server_vm_disk1_keep_on_remove" {
@@ -411,7 +423,7 @@ variable "nfs_server_vm_disk2_keep_on_remove" {
 variable "nfs_server_folder" {
   type = "string"
 
-  default = "/var/nfs"
+  default = "/export"
 }
 
 # VM Generic Items
@@ -434,35 +446,42 @@ variable "vm_folder" {
 
 variable "vm_dns_servers" {
   type = "list"
+  default = ["10.0.80.11", "10.0.80.12"]
 }
 
 variable "vm_dns_suffixes" {
   type = "list"
+  default = ["vsphere.local", "cam.local"]
 }
 
 variable "vm_clone_timeout" {
   description = "The timeout, in minutes, to wait for the virtual machine clone to complete."
-  default = "30"
+  default = "60"
 }
 
 variable "vsphere_datacenter" {
   type = "string"
+  default = "datacenter1"
 }
 
 variable "vsphere_resource_pool" {
   type = "string"
+  default = "RP-CAM"
 }
 
 variable "vm_template" {
   type = "string"
+  default = "singlenodeicpdeploy"
 }
 
 variable "vm_os_user" {
   type = "string"
+  default = "root"
 }
 
 variable "vm_os_password" {
   type = "string"
+  default = "Passw0rd="
 }
 
 variable "vm_disk1_datastore" {
@@ -498,7 +517,7 @@ variable "icp_binary_url" {
 variable "icp_version" {
   type = "string"
 
-  default = "2.1.0.3"
+  default = "3.1.0"
 }
 
 variable "kub_version" {
@@ -509,6 +528,7 @@ variable "kub_version" {
 
 variable "icp_cluster_name" {
   type = "string"
+  default = "mycluster"
 }
 
 # ICP Settings

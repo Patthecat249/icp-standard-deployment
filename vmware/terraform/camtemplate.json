@@ -34,13 +34,13 @@
     "description": "Ubuntu 16<br>"},
 {
     "title": "Topology",
-    "description": "The Installation-type needs five Virtual Machines (5 VMs) <br> Virtual Machine 1     : IBM Cloud Private Boot/Master Node<br>Virtual Machine 2 : IBM Cloud Private Proxy Node<br>Virtual Machine 3   : IBM Cloud Private Worker1-Nodes<br>Virtual Machine 4 : IBM Cloud Private Worker2-Node<br>Virtual Machine 5    : IBM Cloud Private Worker3-Node<br>"},
+    "description": "The Installation-type needs five Virtual Machines (5 VMs) <br> Virtual Machine 1     : IBM Cloud Private Boot/Master Node<br>Virtual Machine 2 : IBM Cloud Private Proxy Node<br>Virtual Machine 3   : IBM Cloud Private Worker1-Node<br>Virtual Machine 4 : IBM Cloud Private Worker2-Node<br>Virtual Machine 5    : IBM Cloud Private Worker3-Node<br>"},
 {
     "title": "Software Deployed",
     "description": "IBM Cloud Private<br>"},
 {
     "title": "Default Virtual Machine Settings",
-    "description": "<ul><li>Boot/Master-Node: vCPU 16, Memory (GB) 32, Disk (GB) 500</li><li>Proxy-Node: vCPU 8, Memory (GB) 16, Disk (GB) 200</li><li>Worker-Node1,2,3: vCPU 2, Memory (GB) 8, Disk (GB) 100</li><ul>"},
+    "description": "<ul><li><b>Boot/Master-Node:</b> vCPU 16, Memory (GB) 32, Disk (GB) 500</li><li><b>Proxy-Node:</b> vCPU 8, Memory (GB) 16, Disk (GB) 200</li><li><b>Worker-Node1,2,3:</b> vCPU 2, Memory (GB) 8, Disk (GB) 100</li><ul>"},
 {
     "title": "Usage and Special Notes",
     "description": "<ol class=\"list-numbering\"><li>The user is responsible for obtaining appropriate software licenses and downloads prior to template deployment.</li><li>IBM Knowledge Center for IBM Cloud Private - <a href=\"https://www.ibm.com/support/knowledgecenter/en/SSBS6K/product_welcome_cloud_private.html\" target=\"_blank\">https://www.ibm.com/support/knowledgecenter/en/SSBS6K/product_welcome_cloud_private.html</a></li><li>IBM Support Portal - <a href=\"https://www.ibm.com/support/home/\" target=\"_blank\">https://www.ibm.com/support/home/</a></li><ol>"
